@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO & Robots Metadata -->
+  <title>Arturia AstroLab - Firmware Recovery & Upgrade Guide (1.7, 2.0, 2.1+)</title>
+  <meta name="description" content="Guía técnica de recuperación para Arturia AstroLab ante errores de actualización de firmware (versiones 1.7, 2.0, 2.1 o superior). Solución para bloqueo en logo y controlador USB download gadget (Código 28).">
+  <meta name="keywords" content="Arturia AstroLab, AstroLab 1.7, AstroLab 2.0, AstroLab 2.1, AstroLab 3.0, firmware recovery, rockusb, rockusb.inf, USB download gadget, VID_2207, PID_330C, Analog Lab, Update failed, firmware upgrade, brick recovery, unbrick AstroLab">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="AstroLab Technical Community">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Arturia AstroLab - Firmware Recovery Guide">
+  <meta property="og:description" content="Solución oficial para el bloqueo en el logotipo de inicio y controlador USB faltante en Windows (AstroLab 1.7, 2.0 o superior).">
+  <meta property="og:type" content="website">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#" class="logo-group">
+        <div class="logo-mark">
+          <svg width="24" height="24" viewBox="0 0 113.65 113.65" fill="#ffffff">
+            <path d="M56.83 102.68c-25.29 0-45.87-20.57-45.86-45.86 0-11.05 3.93-21.21 10.47-29.13 8.42-10.19 21.16-16.7 35.38-16.7 25.3 0 45.87 20.57 45.87 45.86 0 11.06-3.94 21.21-10.48 29.14-8.41 10.18-21.14 16.69-35.37 16.69m55.01-45.86c0-30.33-24.68-55-55.01-55-19.91 0-37.39 10.63-47.04 26.51-5.06 8.32-7.98 18.08-7.98 28.51 0 30.32 24.68 54.99 55.01 54.99 18.01 0 34.03-8.7 44.07-22.12a54.66 54.66 0 0 0 10.95-32.89M56.76 30.44c1.31.54 3.48 7.5 5.22 13.1L64 49.92l1.08 3.28c-2.87 1.94-5.61 3.47-8.23 3.47-2.65 0-5.4-1.5-8.25-3.41l.79-2.39 2.13-6.71c1.81-5.86 4.08-13.14 5.24-13.72m19.68 25.92c2.13-1.3 4.08-2.23 5.69-2.23h1.39v-9.15h-1.39c-3.08 0-5.92 1.09-8.63 2.61l-.63-1.87-1.04-3.1c-3.79-11.41-7.37-22.18-14.99-22.18-7.63 0-11.21 10.77-15 22.18l-1.68 5.01c-2.71-1.53-5.54-2.64-8.61-2.64h-1.39v9.15h1.39c1.57 0 3.52.94 5.64 2.26-2.95 8.58-6.12 17.14-7.67 17.85h-1.39v10.84h1.39c6.26 0 11.41-10.36 16.07-23.15 3.54 2.17 7.33 3.94 11.25 3.94 3.9 0 7.69-1.8 11.23-3.98 4.78 13.16 9.84 23.2 16.08 23.2h1.39v-9.31l.1-1.37h-1.39c-1.7-.7-4.94-9.62-7.81-18.06"/>
+          </svg>
+        </div>
+        <span class="logo-brand">ARTURIA</span>
+        <span class="logo-badge">ASTROLAB RECOVERY</span>
+      </a>
+
+      <div class="nav-right">
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#diagnostico" class="nav-link" data-i18n="nav_diag">Diagnóstico</a></li>
+            <li><a href="#flujo" class="nav-link" data-i18n="nav_flow">Diagrama</a></li>
+            <li><a href="#recuperacion-pasos" class="nav-link" data-i18n="nav_steps">Pasos</a></li>
+            <li><a href="#checklist" class="nav-link" data-i18n="nav_check">Checklist</a></li>
+            <li><a href="#faq" class="nav-link" data-i18n="nav_faq">FAQ</a></li>
+            <li><a href="#recursos" class="nav-link" data-i18n="nav_resources">Recursos</a></li>
+            <li><a href="#descargo" class="nav-link" data-i18n="nav_disclaimer">Descargo</a></li>
+          </ul>
+        </nav>
+
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button id="langEs" class="lang-btn active" type="button">ES</button>
+          <button id="langEn" class="lang-btn" type="button">EN</button>
+        </div>
+
+        <a href="#recuperacion-pasos" class="btn-nav-cta" data-i18n="nav_cta">Iniciar Guía</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+
+      <h1 class="hero-title" data-i18n-html="hero_title">
+        Recuperación de <span>Arturia AstroLab</span> tras fallo de actualización
+      </h1>
+
+      <p class="hero-subtitle" data-i18n="hero_sub">
+        Guía interactiva para resolver el bloqueo en el logotipo de inicio, error de «USB download gadget» (Código 28 en Windows) y restauración limpia del firmware.
+      </p>
+
+      <!-- Key Stats Grid -->
+      <div class="hero-stats-grid">
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="stat_device_label">Dispositivo</div>
+          <div class="stat-value" data-i18n="stat_device_val">Arturia AstroLab</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="stat_id_label">ID de Hardware Crítico</div>
+          <div class="stat-value mono">
+            <span>USB\VID_2207&PID_330C</span>
+            <button class="btn-copy" data-copy="USB\VID_2207&PID_330C" title="Copiar ID de Hardware" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="stat_cause_label">Causa Principal</div>
+          <div class="stat-value" data-i18n="stat_cause_val">Falta Driver Rockusb</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label" data-i18n="stat_strategy_label">Estrategia Comprobada</div>
+          <div class="stat-value" style="color: var(--arturia-blue);" data-i18n="stat_strategy_val">Restaurar versión previa ➔ luego actualizar</div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#recuperacion-pasos" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span data-i18n="hero_btn_start">Comenzar Asistente</span>
+        </a>
+        <a href="#diagnostico" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span data-i18n="hero_btn_diag">Evaluador de Síntomas</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Diagnostic Symptom Checker -->
+  <section class="section" id="diagnostico">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="diag_tag">Evaluación Rápida</span>
+        <h2 class="section-title" data-i18n="diag_title">¿Tu AstroLab presenta estos síntomas?</h2>
+        <p class="section-desc" data-i18n="diag_desc">Selecciona las casillas que coincidan con el estado de tu instrumento para confirmar si este método aplica a tu caso.</p>
+      </div>
+
+      <div class="diag-panel">
+        <div class="symptoms-grid">
+          <div class="symptom-card" data-symptom="1">
+            <div class="custom-checkbox">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="symptom-info">
+              <h4 data-i18n="symptom_1_title">Bloqueo en el Logo de Arturia</h4>
+              <p data-i18n="symptom_1_desc">Al encender normalmente, la pantalla queda fija en el logotipo y no muestra versión ni completa el arranque.</p>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-symptom="2">
+            <div class="custom-checkbox">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="symptom-info">
+              <h4 data-i18n="symptom_2_title">Congelado en 0.0% o etapas 26-39 de 48</h4>
+              <p data-i18n="symptom_2_desc">Analog Lab avanza la descarga pero el teclado queda detenido en Installing package 1/1 - 0.0%.</p>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-symptom="3">
+            <div class="custom-checkbox">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="symptom-info">
+              <h4 data-i18n="symptom_3_title">Error Update failed en Analog Lab</h4>
+              <p data-i18n="symptom_3_desc">Mensaje: Please ensure the AstroLab is well connected and try again. (Unknown update error).</p>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-symptom="4">
+            <div class="custom-checkbox">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="symptom-info">
+              <h4 data-i18n="symptom_4_title">USB download gadget en Windows</h4>
+              <p data-i18n="symptom_4_desc">En Recovery Mode, el Administrador de Dispositivos muestra advertencia amarilla y Código 28.</p>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-symptom="5">
+            <div class="custom-checkbox">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="symptom-info">
+              <h4 data-i18n="symptom_5_title">ID de Hardware Rockchip 2207:330C</h4>
+              <p data-i18n="symptom_5_desc">El dispositivo no reconocido en modo recuperación posee el identificador USB\VID_2207&PID_330C.</p>
+            </div>
+          </div>
+
+          <div class="symptom-card" data-symptom="6">
+            <div class="custom-checkbox">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="symptom-info">
+              <h4 data-i18n="symptom_6_title">Fallo tanto Online como Update from file</h4>
+              <p data-i18n="symptom_6_desc">Intentar actualizar con el archivo local descargado reproduce el mismo fallo de comunicación.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="diag-summary-box">
+          <div class="diag-left">
+            <div class="diag-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="diag-text">
+              <h4 id="diagCountBadge">0 / 6</h4>
+              <p id="diagStatusText" data-i18n="diag_no_selection">Marca las casillas superiores para diagnosticar el estado de tu instrumento.</p>
+            </div>
+          </div>
+
+          <a href="#recuperacion-pasos" class="btn btn-primary" style="padding: 9px 18px; font-size: 0.88rem;">
+            <span data-i18n="diag_btn_jump">Ir al Paso Recomendado</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Flowchart Diagram -->
+  <section class="section" id="flujo">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="flow_tag">Ruta de Solución</span>
+        <h2 class="section-title" data-i18n="flow_title">Diagrama del Proceso de Recuperación</h2>
+        <p class="section-desc" data-i18n="flow_desc">Haz clic en cualquier fase para saltar directamente a sus instrucciones detalladas.</p>
+      </div>
+
+      <div class="flowchart-container">
+        <div class="flow-grid">
+          <div class="flow-step" data-target-step="1">
+            <div class="flow-step-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="flow-step-title" data-i18n="flow_1_title">1. Fallo al Actualizar</div>
+            <div class="flow-step-desc" data-i18n="flow_1_sub">AstroLab bloqueado en logo</div>
+          </div>
+
+          <div class="flow-separator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+
+          <div class="flow-step" data-target-step="1">
+            <div class="flow-step-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6m-4 0h8v4a4 4 0 0 1-4 4 4 4 0 0 1-4-4V8Zm2 8v6m-4 0h8"/></svg>
+            </div>
+            <div class="flow-step-title" data-i18n="flow_2_title">2. Recovery Mode</div>
+            <div class="flow-step-desc" data-i18n="flow_2_sub">Código 28 en Windows</div>
+          </div>
+
+          <div class="flow-separator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+
+          <div class="flow-step" data-target-step="2">
+            <div class="flow-step-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+            </div>
+            <div class="flow-step-title" data-i18n="flow_3_title">3. Driver Rockusb</div>
+            <div class="flow-step-desc" data-i18n="flow_3_sub">Instalar driver local</div>
+          </div>
+
+          <div class="flow-separator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+
+          <div class="flow-step" data-target-step="3">
+            <div class="flow-step-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            </div>
+            <div class="flow-step-title" data-i18n="flow_4_title">4. Restaurar FW Previo</div>
+            <div class="flow-step-desc" data-i18n="flow_4_sub">Update from file (v1.7)</div>
+          </div>
+
+          <div class="flow-separator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+
+          <div class="flow-step" data-target-step="4">
+            <div class="flow-step-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="flow-step-title" data-i18n="flow_5_title">5. Actualizar Firmware</div>
+            <div class="flow-step-desc" data-i18n="flow_5_sub">Upgrade definitivo (v2.0+)</div>
+          </div>
+
+          <div class="flow-separator">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+
+          <div class="flow-step" data-target-step="5">
+            <div class="flow-step-icon" style="color: var(--status-success);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div class="flow-step-title" data-i18n="flow_6_title">6. Resuelto</div>
+            <div class="flow-step-desc" data-i18n="flow_6_sub">Sistema 100% operativo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step-by-Step Interactive Stepper -->
+  <section class="section" id="recuperacion-pasos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="stepper_tag">Procedimiento Oficial</span>
+        <h2 class="section-title" data-i18n="stepper_title">Asistente Paso a Paso</h2>
+        <p class="section-desc" data-i18n="stepper_desc">Sigue minuciosamente cada fase. La clave fundamental es restaurar primero la versión previa estable antes de actualizar a la versión destino.</p>
+      </div>
+
+      <div class="stepper-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="stepper-menu">
+          <div class="stepper-progress-box">
+            <div class="progress-info">
+              <span id="progressStepLabel">Paso 1 de 5</span>
+              <span id="progressPercent" style="color: var(--arturia-blue);">20%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar-inner" id="progressFill"></div>
+            </div>
+          </div>
+
+          <ul class="stepper-links">
+            <li>
+              <button class="step-btn active" data-step="1" type="button">
+                <span class="step-badge-num">1</span>
+                <span class="step-btn-text" data-i18n="step_1_nav">Acceso a Recovery Mode e Identificación USB</span>
+              </button>
+            </li>
+            <li>
+              <button class="step-btn" data-step="2" type="button">
+                <span class="step-badge-num">2</span>
+                <span class="step-btn-text" data-i18n="step_2_nav">Instalación del Controlador Rockchip Local</span>
+              </button>
+            </li>
+            <li>
+              <button class="step-btn" data-step="3" type="button">
+                <span class="step-badge-num">3</span>
+                <span class="step-btn-text" data-i18n="step_3_nav">La Clave: Reinstalar Firmware Previo</span>
+              </button>
+            </li>
+            <li>
+              <button class="step-btn" data-step="4" type="button">
+                <span class="step-badge-num">4</span>
+                <span class="step-btn-text" data-i18n="step_4_nav">Actualización Definitiva de Firmware</span>
+              </button>
+            </li>
+            <li>
+              <button class="step-btn" data-step="5" type="button">
+                <span class="step-badge-num">5</span>
+                <span class="step-btn-text" data-i18n="step_5_nav">Verificación y Buenas Prácticas</span>
+              </button>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Stepper Content Card -->
+        <main class="stepper-content-card">
+
+          <!-- STEP 1 PANE -->
+          <div class="step-panel active" data-step="1">
+            <span class="step-phase-tag" data-i18n="step_1_phase">Fase 1: Diagnóstico de Bajo Nivel</span>
+            <h3 class="step-title" data-i18n="step_1_h3">Acceso a Recovery Mode e Identificación del Dispositivo</h3>
+            <p class="step-desc" data-i18n="step_1_summary">
+              Cuando el firmware falla durante la escritura, el sistema operativo principal no arranca, pero el procesador mantiene intacto el bootloader de recuperación por hardware.
+            </p>
+
+            <div class="callout callout-info">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <div data-i18n="step_1_info">
+                Durante el arranque normal, el instrumento no expone la interfaz de flasheo. Solo al ingresar en Recovery Mode conmuta a USB download gadget.
+              </div>
+            </div>
+
+            <ul class="instructions-list">
+              <li class="instruction-row">
+                <span class="step-index-pill">1</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_1_i1_title">Conectar el AstroLab por USB directo</h4>
+                  <p data-i18n="step_1_i1_desc">Utiliza el cable USB provisto conectado directamente a un puerto USB de la computadora (evita hubs o puertos de teclados).</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">2</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_1_i2_title">Ingresar en Recovery Mode</h4>
+                  <p data-i18n="step_1_i2_desc">Enciende el AstroLab manteniendo presionada la combinación de recuperación hasta que la pantalla indique el modo Recovery.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">3</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_1_i3_title">Abrir Administrador de Dispositivos</h4>
+                  <p data-i18n="step_1_i3_desc">Presiona Win + X y selecciona Administrador de dispositivos (o ejecuta devmgmt.msc).</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">4</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_1_i4_title">Comprobar el dispositivo no reconocido</h4>
+                  <p data-i18n="step_1_i4_desc">Verás un dispositivo con signo de exclamación amarillo llamado USB download gadget. Haz clic derecho ➔ Propiedades ➔ pestaña Detalles ➔ Id. de hardware. Verifica que contiene:</p>
+                  <div class="code-badge">
+                    <span>USB\VID_2207&PID_330C</span>
+                    <button class="btn-copy" data-copy="USB\VID_2207&PID_330C" title="Copiar ID" type="button">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div class="callout callout-warning">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div data-i18n="step_1_warn">
+                Código 28 en Windows: No están instalados los controladores para este dispositivo. Esto confirma que Windows no puede transferir paquetes porque carece del driver USB de bajo nivel.
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2 PANE -->
+          <div class="step-panel" data-step="2">
+            <span class="step-phase-tag" data-i18n="step_2_phase">Fase 2: Driver de Comunicación</span>
+            <h3 class="step-title" data-i18n="step_2_h3">Instalación del Controlador Rockchip Local</h3>
+            <p class="step-desc" data-i18n="step_2_summary">
+              El microcontrolador interno utiliza la arquitectura Rockchip para el arranque de recuperación. Debemos proporcionar a Windows el controlador de transferencia rockusb.
+            </p>
+
+            <div class="callout callout-success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <div data-i18n="step_2_alert">
+                Archivos incluidos en esta carpeta: Utiliza la carpeta local driver/ que contiene rockusb.inf, rockusb.sys y rockusb.cat sin requerir descargas externas.
+              </div>
+            </div>
+
+            <ul class="instructions-list">
+              <li class="instruction-row">
+                <span class="step-index-pill">1</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_2_i1_title">Localizar la carpeta driver local</h4>
+                  <p data-i18n="step_2_i1_desc">Utiliza la carpeta driver incluida en este directorio, la cual contiene los archivos oficiales del controlador para Windows x64.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">2</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_2_i2_title">Actualizar controlador en Administrador de Dispositivos</h4>
+                  <p data-i18n="step_2_i2_desc">Haz clic derecho sobre USB download gadget (con advertencia amarilla) y selecciona Actualizar controlador.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">3</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_2_i3_title">Seleccionar instalación manual</h4>
+                  <p data-i18n="step_2_i3_desc">Elige la opción «Examinar mi PC en busca de controladores» (Browse my computer for drivers).</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">4</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_2_i4_title">Indicar la ruta de la carpeta driver</h4>
+                  <p data-i18n="step_2_i4_desc">Selecciona la carpeta driver donde se ubica rockusb.inf y completa el asistente.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">5</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_2_i5_title">Verificar la desaparición del Código 28</h4>
+                  <p data-i18n="step_2_i5_desc">Windows reconocerá la interfaz como Rockusb Device y el aviso amarillo desaparecerá.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- STEP 3 PANE -->
+          <div class="step-panel" data-step="3">
+            <span class="step-phase-tag" data-i18n="step_3_phase">Fase 3: El Paso Fundamental</span>
+            <h3 class="step-title" data-i18n="step_3_h3">La Clave: Reinstalar Primero la Versión Previa de Firmware</h3>
+            <p class="step-desc" data-i18n="step_3_summary">
+              No intentes saltar directamente a la versión destino más reciente. La solución comprobada consiste en reinstalar primero la versión previa estable (por ejemplo 1.7) para reconstruir la estructura base de particiones.
+            </p>
+
+            <div class="callout callout-danger">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <div data-i18n="step_3_alert">
+                Regla de Oro: Primero devuelve el sintetizador a un estado operativo normal reinstalando el firmware previo antes de volver a intentar la actualización.
+              </div>
+            </div>
+
+            <ul class="instructions-list">
+              <li class="instruction-row">
+                <span class="step-index-pill">1</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_3_i1_title">Mantener el AstroLab en Recovery Mode</h4>
+                  <p data-i18n="step_3_i1_desc">Asegúrate de que el cable USB continúe conectado y el driver Rockusb esté activo.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">2</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_3_i2_title">Abrir Analog Lab en modo Standalone</h4>
+                  <p data-i18n="step_3_i2_desc">Ejecuta Analog Lab de forma independiente en Windows, nunca como plugin dentro de un DAW.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">3</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_3_i3_title">Acceder a Update from file</h4>
+                  <p data-i18n="step_3_i3_desc">En las opciones del AstroLab en Analog Lab, selecciona la función Update from file (Actualizar desde archivo local).</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">4</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_3_i4_title">Seleccionar el firmware previo oficial</h4>
+                  <p data-i18n="step_3_i4_desc">Carga el archivo de firmware previo oficial de Arturia correspondiente al modelo exacto.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">5</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_3_i5_title">Esperar la instalación completa</h4>
+                  <p data-i18n="step_3_i5_desc">Analog Lab transferirá el paquete a través del driver Rockusb. El instrumento avanzará y se reiniciará solo.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">6</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_3_i6_title">Confirmar el arranque normal</h4>
+                  <p data-i18n="step_3_i6_desc">El AstroLab superará el logo inicial y arrancará normalmente mostrando la interfaz en la versión restaurada.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- STEP 4 PANE -->
+          <div class="step-panel" data-step="4">
+            <span class="step-phase-tag" data-i18n="step_4_phase">Fase 4: Actualización Definitiva</span>
+            <h3 class="step-title" data-i18n="step_4_h3">Actualización a la Versión Destino (2.0 o superior)</h3>
+            <p class="step-desc" data-i18n="step_4_summary">
+              Con el AstroLab en funcionamiento normal y el controlador USB de recuperación ya registrado en Windows, es momento de aplicar la actualización definitiva.
+            </p>
+
+            <div class="callout callout-info">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <div data-i18n="step_4_alert">
+                Ahora el sistema está preparado: Si el instalador conmuta a modo recuperación durante la carga, Windows ya posee el controlador necesario para finalizarla con éxito.
+              </div>
+            </div>
+
+            <ul class="instructions-list">
+              <li class="instruction-row">
+                <span class="step-index-pill">1</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_4_i1_title">Verificar Analog Lab actualizado</h4>
+                  <p data-i18n="step_4_i1_desc">Comprueba que cuentas con la última versión de Analog Lab desde el Arturia Software Center.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">2</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_4_i2_title">Iniciar la actualización</h4>
+                  <p data-i18n="step_4_i2_desc">Inicia la actualización de firmware desde Analog Lab (online o mediante Update from file).</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">3</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_4_i3_title">Supervisar las 48 etapas</h4>
+                  <p data-i18n="step_4_i3_desc">Verás avanzar el contador de 48 etapas sin congelarse en 0.0% gracias al driver en comunicación continua.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill">4</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_4_i4_title">Reinicio y finalización</h4>
+                  <p data-i18n="step_4_i4_desc">El AstroLab se reiniciará automáticamente y cargará la nueva versión de firmware.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- STEP 5 PANE -->
+          <div class="step-panel" data-step="5">
+            <span class="step-phase-tag" style="color: var(--status-success);" data-i18n="step_5_phase">Fase 5: Estado Operativo</span>
+            <h3 class="step-title" data-i18n="step_5_h3">¡AstroLab Recuperado y Actualizado con Éxito!</h3>
+            <p class="step-desc" data-i18n="step_5_summary">
+              Tu instrumento ha sido recuperado y se encuentra en funcionamiento al 100% con todas sus características operativas.
+            </p>
+
+            <div class="callout callout-success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <div data-i18n="step_5_alert">
+                Resultado Confirmado: El sintetizador arranca sin demoras, muestra la versión actualizada y enlaza perfectamente con Analog Lab.
+              </div>
+            </div>
+
+            <h4 style="margin: 22px 0 10px; font-size: 1.02rem; color: var(--text-main);" data-i18n="step_5_bp_title">Buenas prácticas para futuras actualizaciones:</h4>
+            <ul class="instructions-list">
+              <li class="instruction-row">
+                <span class="step-index-pill" style="color: var(--status-success);">✓</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_5_bp1_title">Conservar el controlador Rockusb instalado</h4>
+                  <p data-i18n="step_5_bp1_desc">Mantenlo en el sistema para cualquier mantenimiento futuro.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill" style="color: var(--status-success);">✓</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_5_bp2_title">Conexión USB directa y alimentación firme</h4>
+                  <p data-i18n="step_5_bp2_desc">Utiliza siempre los puertos directos de la placa madre y la fuente oficial de alimentación.</p>
+                </div>
+              </li>
+              <li class="instruction-row">
+                <span class="step-index-pill" style="color: var(--status-success);">✓</span>
+                <div class="instruction-details">
+                  <h4 data-i18n="step_5_bp3_title">Guardar copias locales de firmware</h4>
+                  <p data-i18n="step_5_bp3_desc">Conserva copias de respaldo de los instaladores de firmware oficiales de Arturia.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Stepper Navigation Controls -->
+          <div class="stepper-nav-controls">
+            <button class="btn btn-secondary" id="btnPrevStep" disabled type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+              <span data-i18n="btn_prev">Paso Anterior</span>
+            </button>
+            <button class="btn btn-primary" id="btnNextStep" type="button">
+              <span data-i18n="btn_next">Siguiente Paso</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pre-Flight Interactive Checklist -->
+  <section class="section" id="checklist">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="check_tag">Preparación</span>
+        <h2 class="section-title" data-i18n="check_title">Checklist Pre-Recuperación</h2>
+        <p class="section-desc" data-i18n="check_desc">Tus selecciones se guardan automáticamente en tu navegador local para que puedas retomar el proceso en cualquier momento.</p>
+      </div>
+
+      <div class="checklist-grid">
+        <div class="check-item" data-check="1">
+          <div class="check-box-visual">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="check-info">
+            <h4 data-i18n="check_1_title">Alimentación Eléctrica Segura</h4>
+            <p data-i18n="check_1_desc">AstroLab conectado con su fuente de poder original a la toma eléctrica.</p>
+          </div>
+        </div>
+
+        <div class="check-item" data-check="2">
+          <div class="check-box-visual">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="check-info">
+            <h4 data-i18n="check_2_title">Conexión USB Directa</h4>
+            <p data-i18n="check_2_desc">Cable USB directo a la computadora sin hubs ni adaptadores pasivos.</p>
+          </div>
+        </div>
+
+        <div class="check-item" data-check="3">
+          <div class="check-box-visual">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="check-info">
+            <h4 data-i18n="check_3_title">Carpeta driver Local Lista</h4>
+            <p data-i18n="check_3_desc">Carpeta driver/ con rockusb.inf y rockusb.sys en este mismo directorio.</p>
+          </div>
+        </div>
+
+        <div class="check-item" data-check="4">
+          <div class="check-box-visual">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="check-info">
+            <h4 data-i18n="check_4_title">Firmware Previo Oficial Descargado</h4>
+            <p data-i18n="check_4_desc">Archivo de firmware previo listo para Update from file.</p>
+          </div>
+        </div>
+
+        <div class="check-item" data-check="5">
+          <div class="check-box-visual">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="check-info">
+            <h4 data-i18n="check_5_title">Analog Lab en Modo Standalone</h4>
+            <p data-i18n="check_5_desc">Analog Lab ejecutándose de forma independiente fuera de cualquier DAW.</p>
+          </div>
+        </div>
+
+        <div class="check-item" data-check="6">
+          <div class="check-box-visual">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="check-info">
+            <h4 data-i18n="check_6_title">Administrador de Dispositivos Abierto</h4>
+            <p data-i18n="check_6_desc">devmgmt.msc activo para verificar el reconocimiento de la interfaz.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; text-align: right;">
+        <button class="btn btn-secondary" id="resetChecklistBtn" style="padding: 7px 14px; font-size: 0.82rem;" type="button" data-i18n="btn_reset_check">
+          Restablecer Checklist
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="faq_tag">Dudas y Soporte</span>
+        <h2 class="section-title" data-i18n="faq_title">Preguntas Frecuentes</h2>
+        <p class="section-desc" data-i18n="faq_desc">Respuestas técnicas sobre los aspectos más importantes del proceso de recuperación.</p>
+      </div>
+
+      <div class="faq-stack">
+        <div class="faq-card">
+          <button class="faq-trigger" type="button">
+            <span data-i18n="faq_1_q">¿Por qué el AstroLab se congeló en el logotipo de inicio?</span>
+            <span class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p data-i18n="faq_1_a">Durante la actualización de firmware, el sistema reescribe particiones de arranque. Al no contar Windows con el driver adecuado para comunicarse con el procesador en modo flasheo, la escritura quedó incompleta, impidiendo el arranque normal.</p>
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-trigger" type="button">
+            <span data-i18n="faq_2_q">¿Por qué es necesario reinstalar la versión previa antes de la más nueva?</span>
+            <span class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p data-i18n="faq_2_a">El paquete de la versión más reciente asume que el sistema base está íntegro. Si existen bloques corruptos por el fallo previo, el instalador puede detenerse nuevamente. La versión previa reconstruye la estructura base original esperada y permite luego una actualización limpia.</p>
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-trigger" type="button">
+            <span data-i18n="faq_3_q">¿Qué significa el Código 28 en Windows?</span>
+            <span class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p data-i18n="faq_3_a">El Código 28 indica que el sistema operativo ha detectado la conexión de un componente por hardware (USB download gadget), pero no dispone del archivo de controlador necesario en su biblioteca para iniciar la comunicación.</p>
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-trigger" type="button">
+            <span data-i18n="faq_4_q">¿Esta solución aplica a cualquier versión de AstroLab?</span>
+            <span class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p data-i18n="faq_4_a">Sí. Aplica a cualquier actualización fallida (1.7 a 2.0, 2.0 a 2.1 o futuras versiones), ya que la causa raíz es la falta del driver Rockusb en Windows durante el Recovery Mode.</p>
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <button class="faq-trigger" type="button">
+            <span data-i18n="faq_5_q">¿Qué debo hacer si la pantalla permanece en 0.0% durante la instalación?</span>
+            <span class="faq-chevron">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="faq-body">
+            <p data-i18n="faq_5_a">No desconectes el cable. Revisa en el Administrador de dispositivos si el controlador Rockusb está activo. Si no está instalado, instala el driver de la carpeta local. Si ya está instalado y no avanza, reinicia en Recovery Mode y prueba la opción Update from file con el firmware previo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources & Downloads Hub -->
+  <section class="section" id="recursos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="res_tag">Documentación y Descargas</span>
+        <h2 class="section-title" data-i18n="res_title">Recursos y Enlaces Oficiales</h2>
+        <p class="section-desc" data-i18n="res_desc">Acceso a los archivos locales del controlador y a los canales oficiales de soporte de Arturia.</p>
+      </div>
+
+      <div class="resources-grid">
+        <div class="resource-box">
+          <div>
+            <div class="resource-top">
+              <div class="resource-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+              </div>
+              <div class="resource-title" data-i18n="res_card1_title">Carpeta driver Local</div>
+            </div>
+            <p class="resource-desc" data-i18n="res_card1_desc">
+              Controlador rockusb.inf, rockusb.sys y catálogo oficial para Windows x64 ubicado en esta misma carpeta.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
+            <div class="code-badge" style="justify-content: space-between; flex: 1; min-width: 140px;">
+              <span>./driver/</span>
+              <button class="btn-copy" data-copy="driver" title="Copiar ruta" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              </button>
+            </div>
+            <a href="driver/astrolab-rockusb-driver.zip" download="astrolab-rockusb-driver.zip" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 14px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-i18n="res_card1_download">Descargar ZIP</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="resource-box">
+          <div>
+            <div class="resource-top">
+              <div class="resource-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </div>
+              <div class="resource-title" data-i18n="res_card2_title">Soporte Oficial Arturia AstroLab</div>
+            </div>
+            <p class="resource-desc" data-i18n="res_card2_desc">
+              Guía oficial de resolución de problemas y preguntas frecuentes de AstroLab en Arturia Support.
+            </p>
+          </div>
+          <a href="https://support.arturia.com/hc/en-us/articles/13458129452060-AstroLab-Troubleshoot" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 14px;">
+            <span data-i18n="res_card2_link">Arturia Troubleshoot ➔</span>
+          </a>
+        </div>
+
+        <div class="resource-box">
+          <div>
+            <div class="resource-top">
+              <div class="resource-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+              <div class="resource-title" data-i18n="res_card3_title">Descargas y Firmware Oficial Arturia</div>
+            </div>
+            <p class="resource-desc" data-i18n="res_card3_desc">
+              Portal oficial de descargas de instaladores, manuales y firmwares oficiales de Arturia.
+            </p>
+          </div>
+          <a href="https://www.arturia.com/support/downloads-manuals" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.85rem; padding: 8px 14px;">
+            <span data-i18n="res_card3_link">Descargas Oficiales ➔</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated Disclaimer Section -->
+  <section class="disclaimer-section" id="descargo">
+    <div class="container">
+      <div class="disclaimer-card">
+        <h3 class="disclaimer-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span data-i18n="disclaimer_title">Descargo de Responsabilidad y Aviso Legal</span>
+        </h3>
+        <p class="disclaimer-text" data-i18n="disclaimer_p1">
+          Esta guía interactiva y sus recursos asociados han sido elaborados de manera independiente con propósitos exclusivamente educativos, informativos y de soporte técnico comunitario. Este sitio web no está afiliado, patrocinado, respaldado ni asociado de ningún modo con Arturia ni con ninguna de sus filiales.
+        </p>
+        <p class="disclaimer-text" data-i18n="disclaimer_p2">
+          «Arturia», «AstroLab», «Analog Lab» y sus respectivos logotipos e identidades gráficas son marcas comerciales o marcas registradas propiedad de Arturia. Su mención en este sitio responde exclusivamente a la necesidad técnica de identificar la compatibilidad del dispositivo.
+        </p>
+        <p class="disclaimer-text" data-i18n="disclaimer_p3">
+          Cualquier intervención sobre controladores de bajo nivel, manipulación del modo de recuperación (Recovery Mode) o escritura en memoria flash de firmware es realizada bajo la entera responsabilidad y riesgo del usuario. Ni los creadores ni colaboradores de este sitio asumirán responsabilidad alguna ante fallos de hardware, anulación de garantías oficiales o pérdida de datos. Si el equipo se encuentra dentro de su periodo de garantía oficial, se recomienda encarecidamente contactar primero con el servicio técnico oficial de Arturia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-notice" id="toastNotice">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastNoticeMsg">Copiado</span>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-links-row">
+        <a href="#diagnostico" data-i18n="nav_diag">Diagnóstico</a>
+        <a href="#flujo" data-i18n="nav_flow">Diagrama</a>
+        <a href="#recuperacion-pasos" data-i18n="nav_steps">Paso a Paso</a>
+        <a href="#checklist" data-i18n="nav_check">Checklist</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#recursos" data-i18n="nav_resources">Recursos</a>
+        <a href="#descargo" data-i18n="nav_disclaimer">Descargo Legal</a>
+      </div>
+      <p class="footer-disclaimer" data-i18n="footer_disclaimer">
+        Documentación técnica independiente para asistencia en la recuperación de controladores de hardware. Arturia y AstroLab son marcas registradas de Arturia. Guía orientativa no sustitutiva de los canales oficiales de asistencia técnica.
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
