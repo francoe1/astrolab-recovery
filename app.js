@@ -5,7 +5,11 @@
 
 const translations = {
   es: {
-    // Nav
+    // Nav & Legal
+    badge_unofficial: "NO OFICIAL",
+    legal_banner_bold: "Aviso Importante / No Oficial:",
+    legal_banner_text: "Esta guía comunitaria <strong>no ha sido probada ni aprobada por Arturia</strong>, ni es un sitio oficial. Para soporte técnico oficial o validar su caso, por favor contacte directamente con",
+    legal_banner_link: "Arturia Support ↗",
     nav_diag: "Diagnóstico",
     nav_flow: "Diagrama",
     nav_steps: "Pasos",
@@ -67,7 +71,7 @@ const translations = {
     flow_6_sub: "Sistema 100% operativo",
 
     // Stepper
-    stepper_tag: "Procedimiento Oficial",
+    stepper_tag: "Procedimiento de Recuperación",
     stepper_title: "Asistente Paso a Paso",
     stepper_desc: "Sigue minuciosamente cada fase. La clave fundamental es restaurar primero la versión previa estable antes de actualizar a la versión destino.",
     step_label: "Paso",
@@ -207,17 +211,24 @@ const translations = {
     res_card3_link: "Descargas Oficiales ➔",
 
     // Disclaimer
+    disclaimer_badge: "COMUNIDAD INDEPENDIENTE • NO OFICIAL",
     disclaimer_title: "Descargo de Responsabilidad y Aviso Legal",
-    disclaimer_p1: "Esta guía interactiva y sus recursos asociados han sido elaborados de manera independiente con propósitos exclusivamente educativos, informativos y de soporte técnico comunitario. Este sitio web no está afiliado, patrocinado, respaldado ni asociado de ningún modo con Arturia ni con ninguna de sus filiales.",
-    disclaimer_p2: "«Arturia», «AstroLab», «Analog Lab» y sus respectivos logotipos e identidades gráficas son marcas comerciales o marcas registradas propiedad de Arturia. Su mención en este sitio responde exclusivamente a la necesidad técnica de identificar la compatibilidad del dispositivo.",
-    disclaimer_p3: "Cualquier intervención sobre controladores de bajo nivel, manipulación del modo de recuperación (Recovery Mode) o escritura en memoria flash de firmware es realizada bajo la entera responsabilidad y riesgo del usuario. Ni los creadores ni colaboradores de este sitio asumirán responsabilidad alguna ante fallos de hardware, anulación de garantías oficiales o pérdida de datos. Si el instrumento se encuentra dentro de su periodo de garantía oficial, se recomienda encarecidamente contactar primero con el servicio técnico oficial de Arturia.",
+    disclaimer_highlight: "<strong>Declaración de no afiliación y validación:</strong> Este proyecto, sus procedimientos técnicos y los controladores aquí referenciados <strong>NO han sido probados ni aprobados por Arturia</strong>. Este sitio web no es oficial de Arturia ni mantiene relación comercial, patrocinio o respaldo con Arturia SAS. No se utilizan logotipos oficiales de la marca. Si desea soporte oficial o validar su caso, por favor contacte directamente con el servicio técnico de Arturia.",
+    disclaimer_p1: "Esta guía interactiva y sus recursos asociados han sido elaborados de manera independiente por usuarios de la comunidad con propósitos exclusivamente educativos, informativos y de soporte técnico entre particulares. Este sitio web no es un canal oficial de Arturia ni de ninguna de sus filiales.",
+    disclaimer_p2: "«Arturia», «AstroLab», «Analog Lab» y sus signos distintivos asociados son marcas comerciales o registradas propiedad de Arturia SAS. Su mención en este sitio responde exclusivamente a la necesidad técnica de identificar la compatibilidad del dispositivo bajo las doctrinas de uso legítimo descriptivo (Fair Use). En este sitio web no se utiliza ningún logotipo oficial de Arturia.",
+    disclaimer_p3: "Cualquier intervención sobre controladores de bajo nivel, manipulación del modo de recuperación (Recovery Mode) o escritura en memoria flash de firmware es realizada bajo la entera responsabilidad y riesgo del usuario. Ni los creadores ni colaboradores de este sitio asumirán responsabilidad alguna ante fallos de hardware, anulación de garantías oficiales o pérdida de datos.",
+    disclaimer_p4: "Si su instrumento se encuentra dentro de su periodo de garantía oficial o requiere asistencia técnica certificada, se recomienda encarecidamente acudir primero a los canales oficiales de Arturia: <a href=\"https://www.arturia.com/support\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: var(--arturia-blue); font-weight: 600; text-decoration: underline;\">arturia.com/support</a>.",
 
     // Footer
-    footer_disclaimer: "Documentación técnica independiente para asistencia en la recuperación de controladores de hardware. Arturia y AstroLab son marcas registradas de Arturia. Guía orientativa no sustitutiva de los canales oficiales de asistencia técnica."
+    footer_disclaimer: "Guía comunitaria independiente no oficial. Este proyecto no ha sido probado ni aprobado por Arturia. Arturia, AstroLab y Analog Lab son marcas registradas de Arturia SAS. Para soporte oficial o validación, acuda a arturia.com/support."
   },
 
   en: {
-    // Nav
+    // Nav & Legal
+    badge_unofficial: "UNOFFICIAL GUIDE",
+    legal_banner_bold: "Important Notice / Unofficial:",
+    legal_banner_text: "This community guide <strong>has NOT been tested nor approved by Arturia</strong>, nor is it an official website. For official technical support or to validate your case, please contact",
+    legal_banner_link: "Arturia Support ↗",
     nav_diag: "Diagnosis",
     nav_flow: "Flowchart",
     nav_steps: "Steps",
@@ -279,7 +290,7 @@ const translations = {
     flow_6_sub: "100% operational system",
 
     // Stepper
-    stepper_tag: "Official Procedure",
+    stepper_tag: "Recovery Procedure",
     stepper_title: "Step-by-Step Recovery Wizard",
     stepper_desc: "Carefully follow each phase. The fundamental key is restoring the previous stable firmware version before upgrading to the target version.",
     step_label: "Step",
@@ -419,13 +430,16 @@ const translations = {
     res_card3_link: "Official Downloads ➔",
 
     // Disclaimer
+    disclaimer_badge: "INDEPENDENT COMMUNITY • UNOFFICIAL",
     disclaimer_title: "Legal Disclaimer & Notice",
-    disclaimer_p1: "This interactive guide and its associated assets have been independently compiled strictly for educational, troubleshooting, and community technical assistance purposes. This website is not affiliated with, endorsed by, sponsored by, or associated in any way with Arturia or any of its subsidiaries.",
-    disclaimer_p2: "«Arturia», «AstroLab», «Analog Lab», and their respective logos and graphic marks are trademarks or registered trademarks of Arturia. Their reference here is solely for technical identification and compatibility purposes.",
-    disclaimer_p3: "Any modification of low-level device drivers, hardware recovery modes, or firmware flashing is undertaken at the user's sole risk and discretion. The creators and contributors of this guide accept no liability for any direct or indirect damage, warranty voidance, data loss, or hardware malfunction. If your instrument is within its official warranty period, you are strongly advised to contact official Arturia Support first.",
+    disclaimer_highlight: "<strong>Non-Affiliation & Validation Statement:</strong> This project, its technical procedures, and the referenced driver files <strong>have NOT been tested nor approved by Arturia</strong>. This website is not an official Arturia portal and holds no commercial affiliation, sponsorship, or endorsement from Arturia SAS. No official Arturia logos are used. For official support or to validate your case, please contact Arturia Support directly.",
+    disclaimer_p1: "This interactive guide and its associated assets have been independently compiled by community users strictly for educational, informational, and community technical support purposes. This website is not an official channel of Arturia or any of its subsidiaries.",
+    disclaimer_p2: "«Arturia», «AstroLab», «Analog Lab», and associated distinctive marks are trademarks or registered trademarks owned by Arturia SAS. Their reference here is strictly nominative to identify device hardware compatibility (Fair Use). No official Arturia logos are used on this site.",
+    disclaimer_p3: "Any modification of low-level device drivers, recovery modes, or firmware flashing is undertaken at the user's sole risk and discretion. The creators and contributors of this guide accept no liability for any hardware malfunctions, official warranty voidance, or data loss.",
+    disclaimer_p4: "If your instrument is within its official warranty period or if you require certified manufacturer support, you are strongly advised to contact official Arturia Support first: <a href=\"https://www.arturia.com/support\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: var(--arturia-blue); font-weight: 600; text-decoration: underline;\">arturia.com/support</a>.",
 
     // Footer
-    footer_disclaimer: "Independent technical documentation for hardware driver recovery assistance. Arturia and AstroLab are registered trademarks of Arturia. Non-official advisory guide supplementary to official customer support."
+    footer_disclaimer: "Independent unofficial community guide. This project has not been tested nor approved by Arturia. Arturia, AstroLab, and Analog Lab are registered trademarks of Arturia SAS. For official support or validation, visit arturia.com/support."
   }
 };
 

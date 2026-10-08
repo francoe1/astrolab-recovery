@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO & Robots Metadata -->
-  <title>Arturia AstroLab - Firmware Recovery & Upgrade Guide (1.7, 2.0, 2.1+)</title>
-  <meta name="description" content="Guía técnica de recuperación para Arturia AstroLab ante errores de actualización de firmware (versiones 1.7, 2.0, 2.1 o superior). Solución para bloqueo en logo y controlador USB download gadget (Código 28).">
-  <meta name="keywords" content="Arturia AstroLab, AstroLab 1.7, AstroLab 2.0, AstroLab 2.1, AstroLab 3.0, firmware recovery, rockusb, rockusb.inf, USB download gadget, VID_2207, PID_330C, Analog Lab, Update failed, firmware upgrade, brick recovery, unbrick AstroLab">
+  <title>AstroLab - Guía de Recuperación Técnica (No Oficial / Community Guide)</title>
+  <meta name="description" content="Guía técnica comunitaria e independiente para AstroLab ante fallos de actualización de firmware. No oficial ni aprobada por Arturia.">
+  <meta name="keywords" content="AstroLab recovery, AstroLab 1.7, AstroLab 2.0, AstroLab 2.1, AstroLab firmware recovery, rockusb, rockusb.inf, USB download gadget, VID_2207, PID_330C, Analog Lab update failed, unbrick AstroLab">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="AstroLab Technical Community">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Arturia AstroLab - Firmware Recovery Guide">
-  <meta property="og:description" content="Solución oficial para el bloqueo en el logotipo de inicio y controlador USB faltante en Windows (AstroLab 1.7, 2.0 o superior).">
+  <meta property="og:title" content="AstroLab - Guía de Recuperación Técnica (No Oficial)">
+  <meta property="og:description" content="Guía comunitaria independiente de recuperación para AstroLab ante fallos de firmware y controlador USB faltante. No oficial de Arturia.">
   <meta property="og:type" content="website">
 
   <!-- Typography -->
@@ -29,14 +29,17 @@
   <!-- Top Navigation Header -->
   <header class="site-header">
     <div class="nav-container">
-      <a href="#" class="logo-group">
-        <div class="logo-mark">
-          <svg width="24" height="24" viewBox="0 0 113.65 113.65" fill="#ffffff">
-            <path d="M56.83 102.68c-25.29 0-45.87-20.57-45.86-45.86 0-11.05 3.93-21.21 10.47-29.13 8.42-10.19 21.16-16.7 35.38-16.7 25.3 0 45.87 20.57 45.87 45.86 0 11.06-3.94 21.21-10.48 29.14-8.41 10.18-21.14 16.69-35.37 16.69m55.01-45.86c0-30.33-24.68-55-55.01-55-19.91 0-37.39 10.63-47.04 26.51-5.06 8.32-7.98 18.08-7.98 28.51 0 30.32 24.68 54.99 55.01 54.99 18.01 0 34.03-8.7 44.07-22.12a54.66 54.66 0 0 0 10.95-32.89M56.76 30.44c1.31.54 3.48 7.5 5.22 13.1L64 49.92l1.08 3.28c-2.87 1.94-5.61 3.47-8.23 3.47-2.65 0-5.4-1.5-8.25-3.41l.79-2.39 2.13-6.71c1.81-5.86 4.08-13.14 5.24-13.72m19.68 25.92c2.13-1.3 4.08-2.23 5.69-2.23h1.39v-9.15h-1.39c-3.08 0-5.92 1.09-8.63 2.61l-.63-1.87-1.04-3.1c-3.79-11.41-7.37-22.18-14.99-22.18-7.63 0-11.21 10.77-15 22.18l-1.68 5.01c-2.71-1.53-5.54-2.64-8.61-2.64h-1.39v9.15h1.39c1.57 0 3.52.94 5.64 2.26-2.95 8.58-6.12 17.14-7.67 17.85h-1.39v10.84h1.39c6.26 0 11.41-10.36 16.07-23.15 3.54 2.17 7.33 3.94 11.25 3.94 3.9 0 7.69-1.8 11.23-3.98 4.78 13.16 9.84 23.2 16.08 23.2h1.39v-9.31l.1-1.37h-1.39c-1.7-.7-4.94-9.62-7.81-18.06"/>
+      <a href="#" class="logo-group" title="AstroLab Recovery Guide">
+        <div class="logo-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" stroke="#0084ff" stroke-width="3"/>
+            <circle cx="32" cy="32" r="22" stroke="#444450" stroke-width="2"/>
+            <path d="M16 32h6l3-8 4 16 4-12 3 7 3-3h9" stroke="#0084ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="14" r="2.5" fill="#0084ff"/>
           </svg>
         </div>
-        <span class="logo-brand">ARTURIA</span>
-        <span class="logo-badge">ASTROLAB RECOVERY</span>
+        <span class="logo-brand">ASTROLAB</span>
+        <span class="logo-badge unofficial-badge" data-i18n="badge_unofficial">NO OFICIAL</span>
       </a>
 
       <div class="nav-right">
@@ -62,6 +65,18 @@
       </div>
     </div>
   </header>
+
+  <!-- Top Non-Affiliation Legal Banner -->
+  <aside class="legal-alert-bar" role="alert" aria-label="Aviso Legal de No Afiliación">
+    <div class="container legal-alert-inner">
+      <span class="legal-alert-icon" aria-hidden="true">⚠️</span>
+      <div class="legal-alert-content">
+        <strong data-i18n="legal_banner_bold">Aviso Importante / No Oficial:</strong>
+        <span data-i18n-html="legal_banner_text">Esta guía comunitaria no ha sido probada ni aprobada por Arturia, ni es un sitio oficial. Para soporte técnico oficial o validar su caso, por favor contacte directamente con</span>
+        <a href="https://www.arturia.com/support" target="_blank" rel="noopener noreferrer" class="legal-alert-link" data-i18n="legal_banner_link">Arturia Support ↗</a>
+      </div>
+    </div>
+  </aside>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -291,7 +306,7 @@
   <section class="section" id="recuperacion-pasos">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag" data-i18n="stepper_tag">Procedimiento Oficial</span>
+        <span class="section-tag" data-i18n="stepper_tag">Procedimiento de Recuperación</span>
         <h2 class="section-title" data-i18n="stepper_title">Asistente Paso a Paso</h2>
         <p class="section-desc" data-i18n="stepper_desc">Sigue minuciosamente cada fase. La clave fundamental es restaurar primero la versión previa estable antes de actualizar a la versión destino.</p>
       </div>
@@ -854,18 +869,29 @@
   <section class="disclaimer-section" id="descargo">
     <div class="container">
       <div class="disclaimer-card">
+        <div class="disclaimer-badge" data-i18n="disclaimer_badge">COMUNIDAD INDEPENDIENTE • NO OFICIAL</div>
         <h3 class="disclaimer-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           <span data-i18n="disclaimer_title">Descargo de Responsabilidad y Aviso Legal</span>
         </h3>
+
+        <div class="disclaimer-highlight-box">
+          <p class="disclaimer-highlight-text" data-i18n-html="disclaimer_highlight">
+            <strong>Declaración de no afiliación y validación:</strong> Este proyecto, sus procedimientos técnicos y los controladores aquí referenciados <strong>NO han sido probados ni aprobados por Arturia</strong>. Este sitio web no es oficial de Arturia ni mantiene relación comercial, patrocinio o respaldo con Arturia SAS. No se utilizan logotipos oficiales de la marca. Si desea soporte oficial o validar su caso, por favor contacte directamente con el servicio técnico de Arturia.
+          </p>
+        </div>
+
         <p class="disclaimer-text" data-i18n="disclaimer_p1">
-          Esta guía interactiva y sus recursos asociados han sido elaborados de manera independiente con propósitos exclusivamente educativos, informativos y de soporte técnico comunitario. Este sitio web no está afiliado, patrocinado, respaldado ni asociado de ningún modo con Arturia ni con ninguna de sus filiales.
+          Esta guía interactiva y sus recursos asociados han sido elaborados de manera independiente por usuarios de la comunidad con propósitos exclusivamente educativos, informativos y de soporte técnico entre particulares. Este sitio web no es un canal oficial de Arturia ni de ninguna de sus filiales.
         </p>
         <p class="disclaimer-text" data-i18n="disclaimer_p2">
-          «Arturia», «AstroLab», «Analog Lab» y sus respectivos logotipos e identidades gráficas son marcas comerciales o marcas registradas propiedad de Arturia. Su mención en este sitio responde exclusivamente a la necesidad técnica de identificar la compatibilidad del dispositivo.
+          «Arturia», «AstroLab», «Analog Lab» y sus signos distintivos asociados son marcas comerciales o registradas propiedad de Arturia SAS. Su mención en este sitio responde exclusivamente a la necesidad técnica de identificar la compatibilidad del dispositivo bajo las doctrinas de uso legítimo descriptivo (Fair Use). En este sitio web no se utiliza ningún logotipo oficial de Arturia.
         </p>
         <p class="disclaimer-text" data-i18n="disclaimer_p3">
-          Cualquier intervención sobre controladores de bajo nivel, manipulación del modo de recuperación (Recovery Mode) o escritura en memoria flash de firmware es realizada bajo la entera responsabilidad y riesgo del usuario. Ni los creadores ni colaboradores de este sitio asumirán responsabilidad alguna ante fallos de hardware, anulación de garantías oficiales o pérdida de datos. Si el equipo se encuentra dentro de su periodo de garantía oficial, se recomienda encarecidamente contactar primero con el servicio técnico oficial de Arturia.
+          Cualquier intervención sobre controladores de bajo nivel, manipulación del modo de recuperación (Recovery Mode) o escritura en memoria flash de firmware es realizada bajo la entera responsabilidad y riesgo del usuario. Ni los creadores ni colaboradores de este sitio asumirán responsabilidad alguna ante fallos de hardware, anulación de garantías oficiales o pérdida de datos.
+        </p>
+        <p class="disclaimer-text" data-i18n-html="disclaimer_p4">
+          Si su instrumento se encuentra dentro de su periodo de garantía oficial o requiere asistencia técnica certificada, se recomienda encarecidamente acudir primero a los canales oficiales de Arturia: <a href="https://www.arturia.com/support" target="_blank" rel="noopener noreferrer" style="color: var(--arturia-blue); font-weight: 600; text-decoration: underline;">arturia.com/support</a>.
         </p>
       </div>
     </div>
@@ -890,7 +916,7 @@
         <a href="#descargo" data-i18n="nav_disclaimer">Descargo Legal</a>
       </div>
       <p class="footer-disclaimer" data-i18n="footer_disclaimer">
-        Documentación técnica independiente para asistencia en la recuperación de controladores de hardware. Arturia y AstroLab son marcas registradas de Arturia. Guía orientativa no sustitutiva de los canales oficiales de asistencia técnica.
+        Guía comunitaria independiente no oficial. Este proyecto no ha sido probado ni aprobado por Arturia. Arturia, AstroLab y Analog Lab son marcas registradas de Arturia SAS. Para soporte oficial o validación, acuda a arturia.com/support.
       </p>
     </div>
   </footer>

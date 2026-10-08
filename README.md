@@ -1,6 +1,11 @@
-# Arturia AstroLab - Firmware Recovery & Upgrade Guide 🎹🛠️
+# AstroLab - Firmware Recovery & Upgrade Guide (Guía Comunitaria No Oficial) 🎹🛠️
 
-Guía interactiva y técnica de recuperación para **Arturia AstroLab** ante fallos de actualización de firmware (1.7 a 2.0, 2.1 o superior), bloqueo en el logotipo de inicio y controlador faltante «USB download gadget» (Código 28 en Administrador de Dispositivos de Windows).
+> [!WARNING]
+> **Aviso Legal / Important Notice**:
+> Este proyecto es una iniciativa comunitaria e independiente y **NO ha sido probado ni aprobado por Arturia**, ni constituye un recurso o software oficial. En este proyecto no se utilizan logotipos oficiales de Arturia.
+> Si desea soporte técnico homologado o requiere validar su caso con el fabricante, por favor contacte directamente con [Arturia Support](https://www.arturia.com/support).
+
+Guía técnica interactiva elaborada por usuarios de la comunidad para **AstroLab** ante fallos de actualización de firmware (1.7 a 2.0, 2.1 o superior), bloqueo en la pantalla de arranque y controlador faltante «USB download gadget» (Código 28 en Administrador de Dispositivos de Windows).
 
 🌐 **Sitio Web en GitHub Pages**: [https://francoe1.github.io/astrolab-recovery/](https://francoe1.github.io/astrolab-recovery/)
 
@@ -22,11 +27,14 @@ Al actualizar el firmware de AstroLab desde **Analog Lab V / Pro**:
 
 ## 📂 Contenido del Repositorio
 - `index.html`: Aplicación web interactiva y responsiva con soporte bilingüe (Español / Inglés).
-- `styles.css`: Sistema de diseño moderno inspirado en la estética industrial de Arturia.
-- `app.js`: Lógica interactiva (evaluador de síntomas, checklist con guardado local, selector de idioma, copiado de rutas).
-- `driver/`: Controladores oficiales Rockusb x64 (`rockusb.inf`, `rockusb.sys`, `rockusb.cat`, `astrolab-rockusb-driver.zip`).
+- `styles.css`: Sistema de diseño moderno y responsivo para soporte técnico comunitario.
+- `app.js`: Lógica interactiva (asistente de recuperación, evaluador de síntomas, checklist con persistencia local, selector de idioma ES/EN).
+- `driver/`: Archivos del controlador Rockchip Rockusb para Windows x64 (`rockusb.inf`, `rockusb.sys`, `rockusb.cat`, `astrolab-rockusb-driver.zip`).
+- `favicon.svg`: Icono vectorial comunitario de AstroLab (dial y forma de onda).
 - `.github/workflows/pages.yml`: Despliegue automatizado continuo en GitHub Pages.
 
-## ⚖️ Descargo de Responsabilidad (Disclaimer)
-Este proyecto es una iniciativa comunitaria e independiente y no está patrocinado ni afiliado oficialmente a Arturia.
-Arturia y AstroLab son marcas registradas de Arturia.
+## ⚖️ Descargo de Responsabilidad (Legal Disclaimer)
+- **No Aprobado por Arturia**: Este proyecto, sus procedimientos y los controladores aquí referenciados **NO han sido probados ni aprobados por Arturia**.
+- **Independencia**: Este proyecto es una iniciativa comunitaria e independiente y no está patrocinado, avalado ni afiliado oficialmente a Arturia SAS ni a ninguna de sus subsidiarias.
+- **Marcas Registradas**: «Arturia», «AstroLab» y «Analog Lab» son marcas comerciales o marcas registradas propiedad de Arturia SAS. Su mención responde únicamente a la necesidad técnica de identificar la compatibilidad del dispositivo bajo el principio de uso legítimo nominativo (Fair Use). Este sitio no utiliza ningún logotipo oficial de Arturia.
+- **Responsabilidad**: La manipulación de firmware y controladores de bajo nivel es responsabilidad exclusiva del usuario. Para asistencia técnica garantizada, acuda a los canales oficiales en [arturia.com/support](https://www.arturia.com/support).
